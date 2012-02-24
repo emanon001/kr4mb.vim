@@ -1,0 +1,141 @@
+*kr4mb.txt* KeyRemap4MacBookのコマンドを使用するためのインタフェース
+
+Version: 0.0.1
+Author : emanon001 <emanon001@gmail.com>
+License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2 {{{
+    This program is free software. It comes without any warranty, to
+    the extent permitted by applicable law. You can redistribute it
+    and/or modify it under the terms of the Do What The Fuck You Want
+    To Public License, Version 2, as published by Sam Hocevar. See
+    http://sam.zoy.org/wtfpl/COPYING for more details.
+}}}
+
+==============================================================================
+目次						*kr4mb-contents*
+
+概要			|kr4mb-introduction|
+インターフェース	|kr4mb-interface|
+  コマンド		  |kr4mb-commands|
+  関数			  |kr4mb-functions|
+  キーマッピング	  |kr4mb-key-mappings|
+  変数			  |kr4mb-variables|
+更新履歴		|kr4mb-changelog|
+
+
+==============================================================================
+導入						*kr4mb-introduction*
+
+*kr4mb* は、KeyRemap4MacBook(*1) のコマンド(*2)を Vim上で使用するための
+インタフェースを提供するプラグインです。
+
+ (*1) http://pqrs.org/macosx/keyremap4macbook/index.html.ja
+ (*2) http://pqrs.org/macosx/keyremap4macbook/document.html.ja#t7
+
+
+==============================================================================
+インターフェース				*kr4mb-interface*
+
+------------------------------------------------------------------------------
+コマンド					*kr4mb-commands*
+
+:KR4MBEnable {identifiers}			*:KR4MBEnable*
+		{identifiers} で指定した re-map設定 を有効にします。
+		{identifiers} はスペースで区切って複数の指定ができます。
+
+:KR4MBDisable {identifiers}			*:KR4MBDisable*
+		{identifiers} で指定した re-map 設定を無効にします。
+		{identifiers} はスペースで区切って複数の指定ができます。
+
+:KR4MBToggle {identifiers}			*:KR4MBToggle*
+		{identifiers} で指定した re-map 設定の有効/無効をトグルします。
+		{identifiers} はスペースで区切って複数の指定ができます。
+
+------------------------------------------------------------------------------
+関数						*kr4mb-functions*
+
+kr4mb#get_configuration_names()			*kr4mb#get_configuration_names()*
+		メニューバーから選択できる設定の一覧を、リストで返却します。
+
+kr4mb#get_index_of_selected_configuration()	*kr4mb#get_index_of_selected_configuration()*
+		メニューバーから選択できる設定の一覧について、
+		選択中の設定が上から何番目に存在するかを返却します。
+		番号は 0 から始まります。
+
+kr4mb#select_configuration_by_index({index})	*kr4mb#select_configuration_by_index()*
+		メニューバーから選択できる設定の一覧について、
+		上から {index} 番目に存在する設定に切り替えます。
+
+kr4mb#select_configuration_by_name({name})	*kr4mb#select_configuration_by_name()*
+		メニューバーから選択できる設定の一覧について、
+		選択中の設定を {name} に切り替えます。
+
+kr4mb#get_changed_settings()			*kr4mb#get_changed_settings()*
+		有効にしているキー入れ替えおよび、キーリピートの変更について
+		の情報をリストで返却します。
+		リストの各要素は、以下に記述する形式の辞書です。
+		key         value~
+		-------     --------------------------------~
+		'id'        各設定の identifier
+		'value'     キー入れ替え: 1(固定のようです)
+		            キーリピートの変更: 変更した値
+
+kr4mb#enable({identifier})			*kr4mb#enable()*
+		{identifier} で指定した re-map 設定を有効にします。
+
+kr4mb#enable_some({identifiers})		*kr4mb#enable_some()*
+		{identifiers} で指定したいくつかの re-map 設定を有効にします。
+		{identifiers} はリストであり、それぞれの要素は
+		{identifier} を指定します。
+
+kr4mb#disable({identifier})			*kr4mb#disable()*
+		{identifier} で指定した re-map 設定を無効にします。
+
+kr4mb#disable_some({identifiers})		*kr4mb#disable_some()*
+		{identifiers} で指定したいくつかの re-map 設定を無効にします。
+		{identifiers} はリストであり、それぞれの要素は
+		{identifier} を指定します。
+
+kr4mb#toggle({identifier})			*kr4mb#toggle()*
+		{identifier} で指定した re-map 設定を無効にします。
+
+kr4mb#toggle_some({identifiers})		*kr4mb#toggle_some()*
+		{identifiers} で指定したいくつかの re-map 設定をトグルします。
+		{identifiers} はリストであり、それぞれの要素は
+		{identifier} を指定します。
+
+------------------------------------------------------------------------------
+変数						*kr4mb-variables*
+
+g:kr4mb#command_path				*g:kr4mb#command_path*
+		KeyRemap4MacBook のコマンドラインインタフェースの
+		ファイルパスを指定します。
+
+		初期値は
+		'/Library/org.pqrs/KeyRemap4MacBook/app/KeyRemap4MacBook_cli.
+		app/Contents/MacOS/KeyRemap4MacBook_cli' です。
+
+g:kr4mb#identifier_aliases			*g:kr4mb#identifier_aliases*
+		{identifier} に対する別名を指定します。
+		この変数は辞書であり、
+		キーとして別名、
+		値として {identifier} を指定します。
+		コマンドや関数を使用する際に {identifier} を指定する必要が
+		ある場合、{identifier} そのものではなく別名を指定することが
+		できます。
+>
+		let g:kr4mb#identifier_aliases = {
+		      \  'to_dvorak': 'private.remap.device_kinesis_qwerty2dvorak_qwerty'
+		      \ }
+<
+		初期値は {} です。
+
+
+==============================================================================
+更新履歴					*kr4mb-changelog*
+
+0.0.1	2012-02-24
+	- 初版。
+
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:
