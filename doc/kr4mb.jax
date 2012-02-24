@@ -1,6 +1,6 @@
 *kr4mb.txt* KeyRemap4MacBookのコマンドを使用するためのインタフェース
 
-Version: 0.0.1
+Version: 0.1.0
 Author : emanon001 <emanon001@gmail.com>
 License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2 {{{
     This program is free software. It comes without any warranty, to
@@ -136,6 +136,12 @@ g:kr4mb#identifier_aliases			*g:kr4mb#identifier_aliases*
 
 ==============================================================================
 更新履歴					*kr4mb-changelog*
+
+0.1.0	2012-02-25
+	- 関数 |kr4mb#list()| を追加。
+	- 関数 |kr4mb#selected()| を追加。
+	- 関数 |kr4mb#select()| を追加。
+	- 関数 |kr4mb#changed()| を追加。
 
 0.0.1	2012-02-24
 	- 初版。
