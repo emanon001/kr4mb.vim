@@ -63,7 +63,7 @@ function! kr4mb#get_configuration_names() " {{{2
   return s:kr4mb.get_configuration_names()
 endfunction
 
-function! kr4mb#get_selected_configuration_index() " {{{2
+function! kr4mb#get_index_of_selected_configuration() " {{{2
   return s:kr4mb.get_index_of_selected_configuration()
 endfunction
 
@@ -75,11 +75,6 @@ endfunction
 
 function! kr4mb#select_configuration_by_name(name) " {{{2
   call s:kr4mb.select_configuration_by_name(a:name)
-endfunction
-
-
-function! kr4mb#get_selected_configuration() " {{{2
-  return s:kr4mb.get_selected_configuration()
 endfunction
 
 
