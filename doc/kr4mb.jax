@@ -53,14 +53,17 @@ License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2 {{{
 ------------------------------------------------------------------------------
 関数						*kr4mb-functions*
 
+						*kr4mb#list()*
 kr4mb#get_configuration_names()			*kr4mb#get_configuration_names()*
 		メニューバーから選択できる設定の一覧を、リストで返却します。
 
+						*kr4mb#selected()*
 kr4mb#get_index_of_selected_configuration()	*kr4mb#get_index_of_selected_configuration()*
 		メニューバーから選択できる設定の一覧について、
 		選択中の設定が上から何番目に存在するかを返却します。
 		番号は 0 から始まります。
 
+						*kr4mb#select()*
 kr4mb#select_configuration_by_index({index})	*kr4mb#select_configuration_by_index()*
 		メニューバーから選択できる設定の一覧について、
 		上から {index} 番目に存在する設定に切り替えます。
@@ -69,6 +72,7 @@ kr4mb#select_configuration_by_name({name})	*kr4mb#select_configuration_by_name()
 		メニューバーから選択できる設定の一覧について、
 		選択中の設定を {name} に切り替えます。
 
+						*kr4mb#changed()*
 kr4mb#get_changed_settings()			*kr4mb#get_changed_settings()*
 		有効にしているキー入れ替えおよび、キーリピートの変更について
 		の情報をリストで返却します。
