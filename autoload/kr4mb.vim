@@ -60,32 +60,32 @@ endfunction
 " Interface {{{1
 
 function! kr4mb#list() " {{{2
-  return s:kr4mb.get_configuration_names()
+  return kr4mb#get_configuration_names()
 endfunction
 
 
 function! kr4mb#get_configuration_names() " {{{2
-  return kr4mb#list()
+  return s:kr4mb.get_configuration_names()
 endfunction
 
 
 function! kr4mb#selected() " {{{2
-  return s:kr4mb.get_index_of_selected_configuration()
+  return kr4mb#get_index_of_selected_configuration()
 endfunction
 
 
 function! kr4mb#get_index_of_selected_configuration() " {{{2
-  return kr4mb#selected()
+  return s:kr4mb.get_index_of_selected_configuration()
 endfunction
 
 
 function! kr4mb#select(idx) " {{{2
-  call s:kr4mb.select_configuration_by_index(a:idx)
+  call kr4mb#select_configuration_by_index(a:idx)
 endfunction
 
 
 function! kr4mb#select_configuration_by_index(idx) " {{{2
-  call kr4mb#select(a:idx)
+  call s:kr4mb.select_configuration_by_index(a:idx)
 endfunction
 
 
@@ -95,12 +95,12 @@ endfunction
 
 
 function! kr4mb#changed() " {{{2
-  return s:kr4mb.get_changed_settings()
+  return kr4mb#get_changed_settings()
 endfunction
 
 
 function! kr4mb#get_changed_settings() " {{{2
-  return kr4mb#changed()
+  return s:kr4mb.get_changed_settings()
 endfunction
 
 
