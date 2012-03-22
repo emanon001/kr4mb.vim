@@ -1,6 +1,6 @@
 *kr4mb.txt* KeyRemap4MacBookのコマンドを使用するためのインタフェース
 
-Version: 0.1.0
+Version: 0.2.0
 Author : emanon001 <emanon001@gmail.com>
 License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2 {{{
     This program is free software. It comes without any warranty, to
@@ -109,7 +109,7 @@ kr4mb#toggle_some({identifiers})		*kr4mb#toggle_some()*
 ------------------------------------------------------------------------------
 変数						*kr4mb-variables*
 
-g:kr4mb#command_path				*g:kr4mb#command_path*
+g:kr4mb_command_path				*g:kr4mb_command_path*
 		KeyRemap4MacBook のコマンドラインインタフェースの
 		ファイルパスを指定します。
 
@@ -117,7 +117,7 @@ g:kr4mb#command_path				*g:kr4mb#command_path*
 		'/Library/org.pqrs/KeyRemap4MacBook/app/KeyRemap4MacBook_cli.
 		app/Contents/MacOS/KeyRemap4MacBook_cli' です。
 
-g:kr4mb#identifier_aliases			*g:kr4mb#identifier_aliases*
+g:kr4mb_identifier_aliases			*g:kr4mb_identifier_aliases*
 		{identifier} に対する別名を指定します。
 		この変数は辞書であり、
 		キーとして別名、
@@ -126,7 +126,7 @@ g:kr4mb#identifier_aliases			*g:kr4mb#identifier_aliases*
 		ある場合、{identifier} そのものではなく別名を指定することが
 		できます。
 >
-		let g:kr4mb#identifier_aliases = {
+		let g:kr4mb_identifier_aliases = {
 		      \  'to_dvorak': 'private.remap.device_kinesis_qwerty2dvorak_qwerty'
 		      \ }
 <
@@ -135,6 +135,11 @@ g:kr4mb#identifier_aliases			*g:kr4mb#identifier_aliases*
 
 ==============================================================================
 更新履歴					*kr4mb-changelog*
+
+0.2.0	2012-03-22
+	- 変数名を |g:kr4mb#command_path| から |g:kr4mb_command_path| に変更。
+	- 変数名を |g:kr4mb#identifier_aliases| から
+	  |g:kr4mb_identifier_aliases| に変更。
 
 0.1.0	2012-02-25
 	- 関数 |kr4mb#list()| を追加。

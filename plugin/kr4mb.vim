@@ -1,5 +1,5 @@
 " Provide the interface of KeyRemap4MacBook.
-" Version: 0.1.0
+" Version: 0.2.0
 " Author:  emanon001 <emanon001@gmail.com>
 " License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2 {{{
 "     This program is free software. It comes without any warranty, to
@@ -26,8 +26,8 @@ set cpoptions&vim
 " Options {{{1
 
 function! s:set_default_option(name, value)
-  if !exists('g:kr4mb#' . a:name)
-    let g:kr4mb#{a:name} = a:value
+  if !exists('g:kr4mb_' . a:name)
+    let g:kr4mb_{a:name} = a:value
   endif
 endfunction
 

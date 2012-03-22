@@ -1,5 +1,5 @@
 " Provide the interface of KeyRemap4MacBook.
-" Version: 0.1.0
+" Version: 0.2.0
 " Author:  emanon001 <emanon001@gmail.com>
 " License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2 {{{
 "     This program is free software. It comes without any warranty, to
@@ -44,8 +44,8 @@ endfunction
 
 function! s:kr4mb.__init_variables__() " {{{3
   let self._variables_ = {
-        \  'command_path': g:kr4mb#command_path,
-        \  'identifier_aliases': g:kr4mb#identifier_aliases
+        \  'command_path': g:kr4mb_command_path,
+        \  'identifier_aliases': g:kr4mb_identifier_aliases
         \ }
 endfunction
 
