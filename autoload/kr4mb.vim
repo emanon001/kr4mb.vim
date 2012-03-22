@@ -38,20 +38,21 @@ let s:kr4mb = {}
 " Preparation of initialization. {{{2
 
 function! s:kr4mb.__init__() " {{{3
+  call self.__init_options__()
   call self.__init_variables__()
-  call self.__init_accessor__()
+endfunction
+
+function! s:kr4mb.__init_options__() " {{{3
+  call s:set_default_option('command_path', 
+      \ '/Library/org.pqrs/KeyRemap4MacBook/app/KeyRemap4MacBook_cli.app/Contents/MacOS/KeyRemap4MacBook_cli')
+  call s:set_default_option('identifier_aliases', {})
 endfunction
 
 function! s:kr4mb.__init_variables__() " {{{3
-  let self._variables_ = {
+  call extend(self, {
         \  'command_path': g:kr4mb_command_path,
         \  'identifier_aliases': g:kr4mb_identifier_aliases
-        \ }
-endfunction
-
-function! s:kr4mb.__init_accessor__() " {{{3
-  call self._define_accessor('accessor', 'command_path')
-  call self._define_accessor('getter', 'identifier_aliases')
+        \ })
 endfunction
 
 
@@ -145,23 +146,23 @@ endfunction
 " Core {{{1
 
 function! s:kr4mb.get_configuration_names() " {{{2
-  return split(system(self.get_command_path() . ' list'), '\n')
+  return split(system(self.command_path . ' list'), '\n')
 endfunction
 
 
 function! s:kr4mb.get_index_of_selected_configuration() " {{{2
-  return str2nr(system(self.get_command_path() . ' selected'))
+  return str2nr(system(self.command_path . ' selected'))
 endfunction
 
 
 function! s:kr4mb.get_name_of_selected_configuration() " {{{2
-  let idx = system(self.get_command_path() . ' selected')
+  let idx = system(self.command_path . ' selected')
   return self.get_configuration_list()[idx]
 endfunction
 
 
 function! s:kr4mb.select_configuration_by_index(idx) " {{{2
-  call system(self.get_command_path() .' select ' . a:idx)
+  call system(self.command_path .' select ' . a:idx)
 endfunction
 
 
@@ -176,7 +177,7 @@ endfunction
 
 
 function! s:kr4mb.get_changed_settings() " {{{2
-  let settings = split(system(self.get_command_path() . ' changed'), '\n')
+  let settings = split(system(self.command_path . ' changed'), '\n')
   let ret = []
   for setting in settings
     let _ = matchlist(setting, '^\(.*\)=\(.*\)$')
@@ -187,23 +188,23 @@ endfunction
 
 
 function! s:kr4mb.enable_remap(identifier) " {{{2
-  let identifier = self.reflect_alias(a:identifier)
-  call system(self.get_command_path() . ' enable ' . identifier)
+  let actual_identifier = self.reflect_alias(a:identifier)
+  call system(self.command_path . ' enable ' . actual_identifier)
 endfunction
 
 
 function! s:kr4mb.disable_remap(identifier) " {{{2
-  let identifier = self.reflect_alias(a:identifier)
-  call system(self.get_command_path() . ' disable ' . identifier)
+  let actual_identifier = self.reflect_alias(a:identifier)
+  call system(self.command_path . ' disable ' . actual_identifier)
 endfunction
 
 
 function! s:kr4mb.toggle_remap(identifier) " {{{2
-  let identifier = self.reflect_alias(a:identifier)
-  if self.enable_p(identifier)
-    call self.disable_remap(identifier)
+  let actual_identifier = self.reflect_alias(a:identifier)
+  if self.enable_p(actual_identifier)
+    call self.disable_remap(actual_identifier)
   else
-    call self.enable_remap(identifier)
+    call self.enable_remap(actual_identifier)
   endif
 endfunction
 
@@ -218,12 +219,12 @@ endfunction
 
 
 function! s:kr4mb.reflect_alias(identifier) " {{{2
-  return get(self.get_identifier_aliases(), a:identifier, a:identifier)
+  return get(self.identifier_aliases, a:identifier, a:identifier)
 endfunction
 
 
 function! kr4mb#complete_identifiers(arg_lead, cmd_line, cursor_pos) " {{{2
-  let comp_list = keys(s:kr4mb.get_identifier_aliases())
+  let comp_list = keys(s:kr4mb.identifier_aliases)
   let input_identifiers = split(a:cmd_line)[1:]
   call filter(comp_list, '!s:has_value_p(input_identifiers, v:val)')
   call filter(comp_list, 'v:val =~# a:arg_lead')
@@ -248,61 +249,10 @@ function! s:kr4mb.enable_p(identifier) " {{{2
 endfunction
 
 
-" Variable operation . {{{2
-
-function! s:kr4mb._get_value(property, ...) " {{{3
-  let ctx = exists('a:1') ? a:1 : self._variables_
-  return get(ctx, a:property)
-endfunction
-
-function! s:kr4mb._set_value(property, value, ...) " {{{3
-  let ctx = exists('a:1') ? a:1 : self._variables_
-  let ctx[a:property] = a:value
-endfunction
-
-function! s:kr4mb._define_accessor(type, property, ...) " {{{3
-  let optional_args = exists('a:1') ? copy(a:1) : {}
-  let optional_args_default_values = {
-        \  'is_hide': s:FALSE,
-        \  'is_pred': s:FALSE,
-        \  'args': '',
-        \  'access_property': '',
-        \  'ctx': ''
-        \ }
-  let options = extend(optional_args_default_values, optional_args)
-
-  if a:type ==# 'accessor'
-    call self.__define_getter(a:property, options)
-    call self.__define_setter(a:property, options)
-  elseif a:type ==# 'getter'
-    call self.__define_getter(a:property, options)
-  elseif a:type ==# 'setter'
-    call self.__define_setter(a:property, options)
+function! s:set_default_option(name, value) " {{{2
+  if !exists('g:kr4mb_' . a:name)
+    let g:kr4mb_{a:name} = a:value
   endif
-endfunction
-
-function! s:kr4mb.__define_getter(property, options) " {{{3
-  execute printf("function! s:kr4mb.%s%s(%s)\n
-        \   return self._get_value(%s%s)\n
-        \ endfunction",
-        \
-        \ a:options.is_hide ? '_' : '',
-        \ a:options.is_pred ? substitute(a:property, '^is_\(.*\)$', '\1_p', '') : 'get_' . a:property,
-        \ !empty(a:options.args) ? join(a:options.args, ', ') : '',
-        \ a:options.access_property != '' ? a:options.access_property :  "'" . a:property . "'",
-        \ a:options.ctx != '' ? ', ' . a:options.ctx : '')
-endfunction
-
-function! s:kr4mb.__define_setter(property, options) " {{{3
-  execute printf("function! s:kr4mb.%sset_%s(%svalue)\n
-        \   return self._set_value(%sa:value%s)\n
-        \ endfunction",
-        \
-        \ a:options.is_hide ? '_' : '',
-        \ a:options.is_pred ? substitute(a:property, '^is_\(.*\)$', '\1', '') : a:property,
-        \ !empty(a:options.args) ? join(a:options.args, ', ') . ', ' : '',
-        \ a:options.access_property != '' ? a:options.access_property . ', ' :  "'" . a:property . "', ",
-        \ a:options.ctx != '' ? ', ' . a:options.ctx : '')
 endfunction
 
 

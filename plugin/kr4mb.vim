@@ -23,21 +23,6 @@ set cpoptions&vim
 
 
 
-" Options {{{1
-
-function! s:set_default_option(name, value)
-  if !exists('g:kr4mb_' . a:name)
-    let g:kr4mb_{a:name} = a:value
-  endif
-endfunction
-
-call s:set_default_option('command_path', 
-      \ '/Library/org.pqrs/KeyRemap4MacBook/app/KeyRemap4MacBook_cli.app/Contents/MacOS/KeyRemap4MacBook_cli')
-call s:set_default_option('identifier_aliases', {})
-
-
-
-
 " Commands {{{1
 
 command! -nargs=+ -complete=customlist,kr4mb#complete_identifiers KR4MBEnable
