@@ -13,7 +13,7 @@ License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2 {{{
 ==============================================================================
 目次						*kr4mb-contents*
 
-概要			|kr4mb-introduction|
+導入			|kr4mb-introduction|
 インターフェース	|kr4mb-interface|
   コマンド		  |kr4mb-commands|
   関数			  |kr4mb-functions|
