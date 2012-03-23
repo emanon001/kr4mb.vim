@@ -1,5 +1,5 @@
 #kr4mb.vim
-Vim plugin: Provide the interface of [KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/index.html).
+Vim plugin: Provide the interface of [KeyRemap4MacBook](http://pqrs.org/macosx/keyremap4macbook/index.html) CLI.
 
 ## Installation
     git clone git://github.com/emanon001/kr4mb.vim.git ~/.vim/bundle/kr4mb.vim/
