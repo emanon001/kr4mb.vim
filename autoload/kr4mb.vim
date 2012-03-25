@@ -1,4 +1,4 @@
-" Provide the interface of KeyRemap4MacBook.
+" Provide the interface of KeyRemap4MacBook CLI.
 " Version: 0.2.0
 " Author:  emanon001 <emanon001@gmail.com>
 " License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2 {{{

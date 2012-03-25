@@ -1,4 +1,4 @@
-*kr4mb.txt* KeyRemap4MacBookのコマンドを使用するためのインタフェース
+*kr4mb.txt* KeyRemap4MacBook CLI を使用するためのインタフェース
 
 Version: 0.2.0
 Author : emanon001 <emanon001@gmail.com>
@@ -24,8 +24,8 @@ License: DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE, Version 2 {{{
 ==============================================================================
 導入						*kr4mb-introduction*
 
-*kr4mb* は、KeyRemap4MacBook(*1) のコマンド(*2)を Vim上で使用するための
-インタフェースを提供するプラグインです。
+*kr4mb* は、KeyRemap4MacBook(*1) のコマンドラインインタフェース(*2)を
+Vim上で使用するためのインタフェースを提供します。
 
  (*1) http://pqrs.org/macosx/keyremap4macbook/index.html.ja
  (*2) http://pqrs.org/macosx/keyremap4macbook/document.html.ja#t7
