@@ -26,13 +26,13 @@ set cpoptions&vim
 " Commands {{{1
 
 command! -nargs=+ -complete=customlist,kr4mb#complete_identifiers KR4MBEnable
-      \ call kr4mb#enable_some(split(<q-args>))
+      \ call kr4mb#enable(split(<q-args>))
 
 command! -nargs=+ -complete=customlist,kr4mb#complete_identifiers KR4MBDisable
-      \ call kr4mb#disable_some(split(<q-args>))
+      \ call kr4mb#disable(split(<q-args>))
 
 command! -nargs=+ -complete=customlist,kr4mb#complete_identifiers KR4MBToggle
-      \ call kr4mb#toggle_some(split(<q-args>))
+      \ call kr4mb#toggle(split(<q-args>))
 
 
 

@@ -38,15 +38,15 @@ Vim上で使用するためのインタフェースを提供します。
 コマンド					*kr4mb-commands*
 
 :KR4MBEnable {identifiers}			*:KR4MBEnable*
-		{identifiers} で指定した re-map 設定 を有効にします。
+		{identifiers} で指定した re-map設定 を有効にします。
 		{identifiers} はスペースで区切って複数の指定ができます。
 
 :KR4MBDisable {identifiers}			*:KR4MBDisable*
-		{identifiers} で指定した re-map 設定を無効にします。
+		{identifiers} で指定した re-map設定を無効にします。
 		{identifiers} はスペースで区切って複数の指定ができます。
 
 :KR4MBToggle {identifiers}			*:KR4MBToggle*
-		{identifiers} で指定した re-map 設定の有効/無効をトグルします。
+		{identifiers} で指定した re-map設定の有効/無効を切り替えます。
 		{identifiers} はスペースで区切って複数の指定ができます。
 
 ------------------------------------------------------------------------------
@@ -82,29 +82,24 @@ kr4mb#get_changed_settings()			*kr4mb#get_changed_settings()*
 		'value'     キー入れ替え: 1(固定のようです)
 		            キーリピートの変更: 変更した値
 
-kr4mb#enable({identifier})			*kr4mb#enable()*
-		{identifier} で指定した re-map 設定を有効にします。
+kr4mb#enable({id-expr})				*kr4mb#enable()*
+		{id-expr} で指定された re-map設定を有効にします。
+		{id-expr} が文字列の場合、該当する re-map設定を有効にします。
+		{id-expr} が |List| の場合、それぞれの要素に該当する
+		re-map設定を有効にします。
 
-kr4mb#enable_some({identifiers})		*kr4mb#enable_some()*
-		{identifiers} で指定したいくつかの re-map 設定を有効にします。
-		{identifiers} はリストであり、それぞれの要素は
-		{identifier} を指定します。
+kr4mb#disable({id-expr})			*kr4mb#disable()*
+		{id-expr} で指定された re-map設定を無効にします。
+		{id-expr} が文字列の場合、該当する re-map設定を無効にします。
+		{id-expr} が |List| の場合、それぞれの要素に該当する
+		re-map設定を無効にします。
 
-kr4mb#disable({identifier})			*kr4mb#disable()*
-		{identifier} で指定した re-map 設定を無効にします。
-
-kr4mb#disable_some({identifiers})		*kr4mb#disable_some()*
-		{identifiers} で指定したいくつかの re-map 設定を無効にします。
-		{identifiers} はリストであり、それぞれの要素は
-		{identifier} を指定します。
-
-kr4mb#toggle({identifier})			*kr4mb#toggle()*
-		{identifier} で指定した re-map 設定を無効にします。
-
-kr4mb#toggle_some({identifiers})		*kr4mb#toggle_some()*
-		{identifiers} で指定したいくつかの re-map 設定をトグルします。
-		{identifiers} はリストであり、それぞれの要素は
-		{identifier} を指定します。
+kr4mb#toggle({id-expr})				*kr4mb#toggle()*
+		{id-expr} で指定された re-map設定の有効/無効を切り替えます。
+		{id-expr} が文字列の場合、該当する re-map設定の有効/無効を
+		切り替えます。
+		{id-expr} が |List| の場合、それぞれの要素に該当する
+		re-map設定の有効/無効を切り替えます。
 
 ------------------------------------------------------------------------------
 変数						*kr4mb-variables*
@@ -136,9 +131,17 @@ g:kr4mb_identifier_aliases			*g:kr4mb_identifier_aliases*
 ==============================================================================
 更新履歴					*kr4mb-changelog*
 
+0.3.0	2012-04-05
+	- 関数 |kr4mb#enable_some| を削除。
+	- 関数 |kr4mb#disable_some| を削除。
+	- 関数 |kr4mb#toggle_some| を削除。
+	- 関数 |kr4mb#enable| の引数としてリストを受け取れるように変更。
+	- 関数 |kr4mb#disable| の引数としてリストを受け取れるように変更。
+	- 関数 |kr4mb#toggle| の引数としてリストを受け取れるように変更。
+
 0.2.0	2012-03-22
-	- 変数名を |g:kr4mb#command_path| から |g:kr4mb_command_path| に変更。
-	- 変数名を |g:kr4mb#identifier_aliases| から
+	- 変数名を g:kr4mb#command_path から |g:kr4mb_command_path| に変更。
+	- 変数名を g:kr4mb#identifier_aliases から
 	  |g:kr4mb_identifier_aliases| に変更。
 
 0.1.0	2012-02-25

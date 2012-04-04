@@ -105,38 +105,26 @@ function! kr4mb#get_changed_settings() " {{{2
 endfunction
 
 
-function! kr4mb#enable(identifier) " {{{2
-  call s:kr4mb.enable_remap(a:identifier)
-endfunction
-
-
-function! kr4mb#enable_some(identifiers) " {{{2
-  for _ in a:identifiers
-    call s:kr4mb.enable_remap(_)
+function! kr4mb#enable(id_expr) " {{{2
+  let identifiers = type(a:id_expr) == type('') ? [a:id_expr] : copy(a:id_expr)
+  for id in identifiers
+    call s:kr4mb.enable_remap(id)
   endfor
 endfunction
 
 
-function! kr4mb#disable(identifier) " {{{2
-  call s:kr4mb.disable_remap(a:identifier)
-endfunction
-
-
-function! kr4mb#disable_some(identifiers) " {{{2
-  for _ in a:identifiers
-    call s:kr4mb.disable_remap(_)
+function! kr4mb#disable(id_expr) " {{{2
+  let identifiers = type(a:id_expr) == type('') ? [a:id_expr] : copy(a:id_expr)
+  for id in identifiers
+    call s:kr4mb.disable_remap(id)
   endfor
 endfunction
 
 
-function! kr4mb#toggle(identifier) " {{{2
-  call s:kr4mb.toggle_remap(a:identifier)
-endfunction
-
-
-function! kr4mb#toggle_some(identifiers) " {{{2
-  for _ in a:identifiers
-    call s:kr4mb.toggle_remap(_)
+function! kr4mb#toggle(id_expr) " {{{2
+  let identifiers = type(a:id_expr) == type('') ? [a:id_expr] : copy(a:id_expr)
+  for id in identifiers
+    call s:kr4mb.toggle_remap(id)
   endfor
 endfunction
 
